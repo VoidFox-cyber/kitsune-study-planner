@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kitsune Notes V2 • Blue Kitsune Hub</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stars">✦ · ✧ · ✦ · ✧ · ✦</div>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="fox">🦊</div><div><b>Kitsune Notes V2</b><small>Blue Kitsune Hub</small></div></div>
+  <button class="nav active" data-page="dashboard">⌂ Dashboard</button>
+  <button class="nav" data-page="notes">📚 Notes</button>
+  <button class="nav" data-page="exams">🎯 Exams</button>
+  <button class="nav" data-page="homework">📝 Homework</button>
+  <button class="nav" data-page="todo">☑ To-Do</button>
+  <button class="nav" data-page="subjects">🗂 Subjects</button>
+  <button class="nav" data-page="sync">🔄 Blue Kitsune Sync</button>
+  <button class="nav" data-page="buddy">🧠 Kitsune Buddy</button>
+  <div class="side-bottom"><button class="primary full" id="quickNote">＋ New Note</button><small>Auto-saves on this device.</small></div>
+</aside>
+
+<main>
+<header>
+  <div><div class="eyebrow">BLUE KITSUNE STUDY HUB</div><h1 id="title">Good morning, Void Fox ✦</h1><p id="subtitle"></p></div>
+  <div class="header-actions"><input id="globalSearch" placeholder="🔍 Search notes..."><button id="glowBtn">✨</button></div>
+</header>
+
+<section id="dashboard" class="page active">
+  <div class="hero">
+    <div><span class="eyebrow">YOUR STUDY DEN</span><h2>Everything in one place.</h2><p>Notes, exams, homework, permanent to-dos and your Blue Kitsune planner — all in one cozy dashboard.</p>
+      <div class="actions"><button class="primary" data-jump="notes">📚 Write a note</button><button class="ghost" data-jump="exams">🎯 View exams</button><button class="ghost" data-jump="sync">🔄 Sync planner</button></div>
+    </div>
+    <div class="mascot"><div class="moon">☾</div><div class="kitsune">🦊</div><div class="paw">🐾</div></div>
+  </div>
+  <div class="stats">
+    <article><span>Study progress</span><strong id="dashProgress">0%</strong><small>from today's academic items</small></article>
+    <article><span>Notes</span><strong id="dashNotes">0</strong><small>saved notes</small></article>
+    <article><span>Next exam</span><strong id="dashExam">—</strong><small id="dashExamSub">No exam added</small></article>
+    <article><span>Kitsune XP</span><strong id="dashXP">0</strong><small>from Blue Kitsune</small></article>
+  </div>
+  <div class="grid2">
+    <article class="panel"><div class="panel-head"><h3>📅 Upcoming exams</h3><button class="text" data-jump="exams">Open →</button></div><div id="dashExams"></div></article>
+    <article class="panel"><div class="panel-head"><h3>🔥 Today's focus</h3><span class="pill" id="todayCount">0</span></div><div id="dashTasks"></div></article>
+  </div>
+  <article class="panel"><div class="panel-head"><h3>📊 Subject snapshot</h3><span class="muted">Math • English • ICT • Science • Tamil</span></div><div id="subjectSnapshot" class="subject-grid"></div></article>
+</section>
+
+<section id="notes" class="page hidden">
+  <div class="page-head"><div><div class="eyebrow">DIGITAL NOTEBOOK</div><h2>Kitsune Notes</h2><p>Type, paste, search, tag and pin. No handwritten-note suffering required. 😭</p></div><button class="primary" id="addNote">＋ New Note</button></div>
+  <div class="toolbar"><select id="noteSubjectFilter"><option value="">All subjects</option></select><select id="noteTypeFilter"><option value="">All note types</option><option>Class Notes</option><option>Revision Notes</option><option>Exam Prep</option></select><input id="noteTagFilter" placeholder="🏷 Filter tag"></div>
+  <div id="notesGrid" class="cards"></div>
+</section>
+
+<section id="exams" class="page hidden">
+  <div class="page-head"><div><div class="eyebrow">EXAM COMMAND CENTER</div><h2>Exams</h2><p>Add your exam date and portion, then let the dashboard show what's next.</p></div><button class="primary" id="addExam">＋ Add Exam</button></div>
+  <div class="exam-alert" id="examAlert"></div>
+  <div id="examGrid" class="cards"></div>
+</section>
+
+<section id="homework" class="page hidden">
+  <div class="page-head"><div><div class="eyebrow">DATED ACADEMIC WORK</div><h2>Homework</h2><p>This uses the same homework collection as your Blue Kitsune planner.</p></div><button class="primary" id="addHW">＋ Add Homework</button></div>
+  <div class="toolbar"><input type="date" id="hwDate"><select id="hwSubjectFilter"><option value="">All subjects</option></select></div>
+  <div class="panel"><div class="panel-head"><h3 id="hwHeading">Homework</h3><span class="pill" id="hwCount">0</span></div><div id="hwList"></div></div>
+</section>
+
+<section id="todo" class="page hidden">
+  <div class="page-head"><div><div class="eyebrow">PERMANENT LIST</div><h2>Everyday To-Do</h2><p>No dates. No deadlines. These are your permanent quests from Blue Kitsune.</p></div><button class="primary" id="addTodo">＋ Add To-Do</button></div>
+  <div class="toolbar"><input id="todoSearch" placeholder="🔍 Search"><select id="todoSubjectFilter"><option value="">All subjects</option></select><select id="todoFilter"><option value="">All</option><option value="open">Incomplete</option><option value="done">Completed</option></select></div>
+  <div class="grid2"><article class="panel"><div class="panel-head"><h3>Open</h3><span class="pill" id="openCount">0</span></div><div id="todoOpen"></div></article><article class="panel"><div class="panel-head"><h3>Completed</h3><span class="pill" id="doneCount">0</span></div><div id="todoDone"></div></article></div>
+</section>
+
+<section id="subjects" class="page hidden">
+  <div class="page-head"><div><div class="eyebrow">YOUR SCHOOL</div><h2>Subjects</h2><p>Your main setup is ready: Math, English, ICT, Science and Tamil. You can add more.</p></div></div>
+  <div class="panel narrow"><div class="add-row"><input id="newSubject" placeholder="e.g. Hindi"><button class="primary" id="addSubject">Add</button></div><div id="subjectList"></div></div>
+</section>
+
+<section id="sync" class="page hidden">
+  <div class="page-head"><div><div class="eyebrow">ONE STUDY SYSTEM</div><h2>Blue Kitsune Sync</h2><p>V2 reads the same Blue Kitsune planner storage key for homework, to-dos and XP, so both apps can share the same planner data when they run in the same browser storage.</p></div></div>
+  <div class="sync-card">
+    <div class="sync-status"><span class="dot"></span><div><b id="syncStatus">Checking Blue Kitsune…</b><small id="syncDetail"></small></div></div>
+    <div class="sync-buttons"><button class="primary" id="pullSync">↙ Pull latest Blue Kitsune data</button><button class="ghost" id="exportSync">⇩ Export backup</button><label class="ghost filebtn">⇧ Import backup<input type="file" id="importSync" accept=".json"></label></div>
+    <div class="sync-box"><b>What syncs</b><ul><li>Homework</li><li>Permanent To-Do list</li><li>Kitsune XP</li><li>Subjects</li><li>Notes and Exams stay in Kitsune Notes V2</li></ul></div>
+  </div>
+</section>
+
+<section id="buddy" class="page hidden">
+  <div class="buddy">
+    <div class="buddy-top"><span class="bigfox">🦊</span><div><h2>Kitsune Buddy</h2><p>Paste a question and I’ll help you understand what to do instead of just dumping an answer.</p></div></div>
+    <div id="chat" class="chat"></div>
+    <div class="presets"><button data-p="Explain this in simple Grade 8 language.">🌱 Explain simply</button><button data-p="Break this into steps and give me a hint first.">🧩 Step by step</button><button data-p="Give me a small example.">💡 Example</button><button data-p="Quiz me one question at a time.">🎯 Quiz me</button></div>
+    <div class="chatbox"><textarea id="buddyInput" rows="3" placeholder="Paste your question here…"></textarea><button class="primary" id="sendBuddy">Send ➜</button></div>
+    <div class="notice">For a real AI tutor, open ChatGPT Study Mode and use the same question or your uploaded textbook material. Study Mode can explain step-by-step, ask questions and quiz you. </div>
+  </div>
+</section>
+</main>
+</div>
+
+<div id="modal" class="modal hidden"><div class="modal-card"><button class="close" id="closeModal">✕</button><div id="modalContent"></div></div></div>
+<script src="script.js"></script>
+</body>
+</html>
